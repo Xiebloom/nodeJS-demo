@@ -22,6 +22,6 @@ app.get('/', (req, res)=> {
 })
 app.use('/api', require('./apiRouter'))
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log('express server running at localhost:3000...');
 })
