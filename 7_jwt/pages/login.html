@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+
+<body>
+
+    <form action="./index.html" method="post" id="form">
+        <div>
+            <label for="username">username </label>
+            <input type="text" name="username">
+        </div>
+        <div>
+            <label for="password">password </label>
+            <input type="password" name="password">
+        </div>
+        <input type="submit" value="subscribe">
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // submit 之后，由 js 发送请求
+        const form = document.querySelector('#form')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // console.log(e);
+            const formData = new FormData(form)
+            const username = formData.get('username')
+            const password = formData.get('password')
+
+            const userinfo = {
+                username,
+                password
+            }
+            console.log(userinfo)
+
+            axios({
+                method: 'post',
+                url: '/api/login',
+                // data: formData,
+                data: userinfo,
+                headers: {
+                    // Overwrite Axios's automatically set Content-Type
+                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+                .then(res => {
+                    console.log(res)
+                })
+        })
+    </script>
+</body>
+
+</html>
